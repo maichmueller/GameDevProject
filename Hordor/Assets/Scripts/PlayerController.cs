@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float radius;
     public LayerMask mask;
     public GameObject groundChecker;
+    public GameObject cam;
     
     private bool _isGrounded;
     private Vector3 _jumpVector;
@@ -58,9 +59,23 @@ public class PlayerController : MonoBehaviour
         //rb.MovePosition((tf.position + _jumpVector + ( movement * (moveSpeed * Time.deltaTime))));
         rb.MovePosition((tf.position + ( movement * (moveSpeed * Time.deltaTime))));
         
-        if (Input.GetKey(KeyCode.LeftShift) && !_isGrounded && _canBoost)
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && !_isGrounded && _canBoost)
         {
-            rb.AddForce(transform.forward * boost);
+            rb.AddForce(cam.transform.forward * boost);
+            //rb.MovePosition(transform.forward * boost);
+            _canBoost = false;
+        }
+        
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && !_isGrounded && _canBoost)
+        {
+            rb.AddForce(-transform.right * boost);
+            //rb.MovePosition(transform.forward * boost);
+            _canBoost = false;
+        }
+        
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && !_isGrounded && _canBoost)
+        {
+            rb.AddForce(transform.right * boost);
             //rb.MovePosition(transform.forward * boost);
             _canBoost = false;
         }
