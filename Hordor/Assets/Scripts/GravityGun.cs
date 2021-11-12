@@ -25,6 +25,11 @@ public class GravityGun : MonoBehaviour
     /// <summary>The maximum distance at which a new object can be picked up</summary>
     public float maxGrabDistance;
     
+    /// <summary>
+    /// The camera attached to the player object
+    /// </summary>
+    public Camera mainCamera;
+    
     /// <summary>The rigidbody we are currently holding</summary>
     private new Rigidbody rigidbody;
 
@@ -45,11 +50,10 @@ public class GravityGun : MonoBehaviour
     /// <summary>Tracks player input to rotate current object. Used and reset every fixedupdate call</summary>
     private Vector2 rotationInput;
 
-    
     /// <returns>Ray from center of the main camera's viewport forward</returns>
     private Ray CenterRay()
     {
-        return Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+        return mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
     }
 	
 	void Update ()
