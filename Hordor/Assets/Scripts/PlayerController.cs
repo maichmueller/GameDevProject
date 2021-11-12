@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask mask;
     public GameObject groundChecker;
     public GameObject cam;
+    public List<Weapon> weaponList;
     
     private bool _isGrounded;
     private Vector3 _jumpVector;
