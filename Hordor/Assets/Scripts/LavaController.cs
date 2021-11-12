@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioClip[] clips;
+    private int i = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class LavaController : MonoBehaviour
         else if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
+            audio.clip = clips[i];
+            audio.Play();
+            if (i < 5)i++;
         }
     }
 }

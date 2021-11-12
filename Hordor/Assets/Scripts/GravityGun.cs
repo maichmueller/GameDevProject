@@ -22,6 +22,9 @@ using UnityEngine;
 public class GravityGun : MonoBehaviour
 {
     
+    // Simple Enemy
+    private SimpleEnemy _enemy;
+    
     /// <summary>The maximum distance at which a new object can be picked up</summary>
     public float maxGrabDistance;
     
@@ -85,8 +88,10 @@ public class GravityGun : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxGrabDistance))
             {
                 // Don't pick up kinematic rigidbodies (they can't move)
-                if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
+                if (hit.rigidbody != null && hit.transform.CompareTag("Enemy"))
                 {
+                    _enemy = hit.transform.GetComponent<SimpleEnemy>();
+                    _enemy.EnablePhysics();
                     // Track rigidbody's initial information
                     rigidbody = hit.rigidbody;
                     initialInterpolationSetting = rigidbody.interpolation;

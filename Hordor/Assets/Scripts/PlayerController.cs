@@ -80,6 +80,15 @@ public class PlayerController : MonoBehaviour
             //rb.MovePosition(transform.forward * boost);
             _canBoost = false;
         }
+        
 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
