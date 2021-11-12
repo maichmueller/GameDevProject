@@ -13,19 +13,18 @@ public class PlayerController : MonoBehaviour
     public GameObject groundChecker;
     public GameObject cam;
     public List<Weapon> weaponList;
-    
+
     private bool _isGrounded;
     private Vector3 _jumpVector;
     private const float Gravity = 9.81f;
 
     private bool _canBoost;
-    
+
     // Components Access
     private Transform tf;
     private Rigidbody rb;
-    
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +47,6 @@ public class PlayerController : MonoBehaviour
         var v = Input.GetAxis("Vertical");
         var h = Input.GetAxis("Horizontal");
         var movement = tf.forward * v + tf.right * h;
-
         //Jumping
         if (Input.GetButton("Jump") && _isGrounded)
         {
@@ -56,30 +54,27 @@ public class PlayerController : MonoBehaviour
             //_jumpVector.y = Mathf.Sqrt(jumpHeight);
             //_jumpVector.y += Gravity * Time.deltaTime;
         }
-        
-        //rb.MovePosition((tf.position + _jumpVector + ( movement * (moveSpeed * Time.deltaTime))));
-        rb.MovePosition((tf.position + ( movement * (moveSpeed * Time.deltaTime))));
-        
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && !_isGrounded && _canBoost)
-        {
-            rb.AddForce(cam.transform.forward * boost);
-            //rb.MovePosition(transform.forward * boost);
-            _canBoost = false;
-        }
-        
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && !_isGrounded && _canBoost)
-        {
-            rb.AddForce(-transform.right * boost);
-            //rb.MovePosition(transform.forward * boost);
-            _canBoost = false;
-        }
-        
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && !_isGrounded && _canBoost)
-        {
-            rb.AddForce(transform.right * boost);
-            //rb.MovePosition(transform.forward * boost);
-            _canBoost = false;
-        }
 
+        //rb.MovePosition((tf.position + _jumpVector + ( movement * (moveSpeed * Time.deltaTime))));
+        rb.MovePosition((tf.position + (movement * (moveSpeed * Time.deltaTime))));
+
+        if (Input.GetKey(KeyCode.LeftShift) && !_isGrounded && _canBoost)
+        {
+            Vector3 dir;
+            if (Input.GetKey(KeyCode.A))
+            {
+                dir = -transform.right;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                dir = transform.right;
+            }
+            else
+            {
+                dir = cam.transform.forward;
+            }
+            rb.AddForce(dir * boost);
+            _canBoost = false;
+        }
     }
 }

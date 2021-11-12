@@ -5,28 +5,13 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Reached");
-        if (other.gameObject.CompareTag("Player"))
+        var otherGO = other.gameObject;
+        if (otherGO.CompareTag("Player") || otherGO.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
+            Debug.Log("Killable object hit lava");
+            otherGO.GetComponent<Health>().Kill();
         }
     }
 }

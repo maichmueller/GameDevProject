@@ -85,7 +85,7 @@ public class GravityGun : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxGrabDistance))
             {
                 // Don't pick up kinematic rigidbodies (they can't move)
-                if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
+                if (hit.rigidbody != null && !hit.transform.gameObject.CompareTag("Player") && !hit.rigidbody.isKinematic)
                 {
                     // Track rigidbody's initial information
                     rigidbody = hit.rigidbody;
