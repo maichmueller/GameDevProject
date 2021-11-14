@@ -19,8 +19,8 @@ public class HealthBar : MonoBehaviour
         _parentTransform = transform.parent.transform.parent;
         _startingPositionDifference = transform.position - _parentTransform.position;
         _parentTransform.GetComponent<Health>().HealthChangeEvent += OnHealthChange;
-        _healthBarImage = this.transform.GetChild(0).GetComponent<Image>();
-        _healthBarValueText = this.transform.GetChild(1).GetComponent<Text>();
+        _healthBarImage = this.transform.GetChild(1).GetComponent<Image>();
+        _healthBarValueText = this.transform.GetChild(2).GetComponent<Text>();
     }
 
 
