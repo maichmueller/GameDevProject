@@ -48,18 +48,12 @@ public class GravityPushGun : Gun
 
     protected override HashSet<GameObject> CheckForHits()
     {
-        return _coneView.inConeObjects;
-    }
-
-    protected override void HandleHit(HashSet<GameObject> hits)
-    {
-        foreach (GameObject gobject in hits)
+        var hitObject = hit.collider.gameObject;
+        var rb = hitObject.GetComponent<Rigidbody>();
+        if (rb && hitObject.gameObject.CompareTag("Enemy"))
         {
-            var rb = gobject.GetComponent<Rigidbody>();
-            if (rb)
-            {
-                rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
-            }
+            hitObject.GetComponent<SimpleEnemy>().EnablePhysics();
+            rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
         }
     }
 }
