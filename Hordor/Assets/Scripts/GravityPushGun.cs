@@ -45,15 +45,22 @@ public class GravityPushGun : Gun
             cartridgeEjection.Play();
         }
     }
-
+    
     protected override HashSet<GameObject> CheckForHits()
     {
-        var hitObject = hit.collider.gameObject;
-        var rb = hitObject.GetComponent<Rigidbody>();
-        if (rb && hitObject.gameObject.CompareTag("Enemy"))
+        return _coneView.inConeObjects;
+    }
+
+    protected override void HandleHit(HashSet<GameObject> hits)
+    {
+        foreach (GameObject gobject in hits)
         {
-            hitObject.GetComponent<SimpleEnemy>().EnablePhysics();
-            rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
+            var rb = gobject.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                gobject.GetComponent<SimpleEnemy>().EnablePhysics();
+                rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
+            }
         }
     }
 }
