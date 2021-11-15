@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
             dir = cam.transform.forward;
         }
 
-        rb.AddForce(dir * boost);
+        rb.AddForce(dir * boost, ForceMode.Impulse);
         _canBoost = false;
     }
 }

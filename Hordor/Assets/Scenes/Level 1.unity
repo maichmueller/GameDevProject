@@ -5947,7 +5947,7 @@ PrefabInstance:
       objectReference: {fileID: 1741441606}
     - target: {fileID: 7739230238725751354, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
       propertyPath: boost
-      value: 500
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7739230238725751354, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
       propertyPath: m_Enabled
@@ -7515,6 +7515,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7739230239218422357, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
   m_PrefabInstance: {fileID: 1319468771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1741441611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741441606}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
+  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  RestPositionOffset: {x: 0, y: 0, z: 0}
+  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1768399196
 GameObject:
   m_ObjectHideFlags: 0

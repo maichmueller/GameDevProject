@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
+using EZCameraShake;
+
 
 public class GravityPushGun : Gun
 {
@@ -18,6 +20,7 @@ public class GravityPushGun : Gun
 
     protected override void Fire()
     {
+        CameraShaker.Instance.ShakeOnce(0.15f, 4f, .1f, .1f);
         anim.SetTrigger("Fire");
         if (cartridgeEjection)
         {
