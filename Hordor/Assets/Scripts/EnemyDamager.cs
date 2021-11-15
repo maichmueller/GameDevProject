@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyDamager : MonoBehaviour
 {
-    public const float minVelocityForDamage = 50;
+    public const float minVelocityForDamage = 10;
     public ParticleSystem damagePS = null;
     private float psTime = 5f;
 

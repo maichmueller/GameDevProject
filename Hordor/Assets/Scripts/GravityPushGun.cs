@@ -32,8 +32,9 @@ public class GravityPushGun : Gun
     {
         var hitObject = hit.collider.gameObject;
         var rb = hitObject.GetComponent<Rigidbody>();
-        if (rb)
+        if (rb && hitObject.gameObject.CompareTag("Enemy"))
         {
+            hitObject.GetComponent<SimpleEnemy>().EnablePhysics();
             rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
         }
     }
