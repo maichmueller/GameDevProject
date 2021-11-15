@@ -34,7 +34,6 @@ public class SimpleEnemy : MonoBehaviour
     {
         if (_phyisicsEnabled && lastpos == transform.position)
         {
-            Debug.Log("REACHED");
             rb.isKinematic = true;
             agent.enabled = true;
             _phyisicsEnabled = false;
@@ -49,4 +48,10 @@ public class SimpleEnemy : MonoBehaviour
         agent.enabled = false;
         _phyisicsEnabled = true;
     }
+
+    // private void OnCollisionStay(Collision other)
+    // {
+    //     other.gameObject.GetComponent<SimpleEnemy>().EnablePhysics();
+    //     other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10000);
+    // }
 }

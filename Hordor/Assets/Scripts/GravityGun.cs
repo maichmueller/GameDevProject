@@ -23,7 +23,7 @@ public class GravityGun : MonoBehaviour
 {
     
     // Simple Enemy
-    private SimpleEnemy _enemy;
+    private EnemyStateMachine _enemy;
     
     /// <summary>The maximum distance at which a new object can be picked up</summary>
     public float maxGrabDistance;
@@ -90,7 +90,8 @@ public class GravityGun : MonoBehaviour
                 // Don't pick up kinematic rigidbodies (they can't move)
                 if (hit.rigidbody != null && hit.transform.CompareTag("Enemy"))
                 {
-                    _enemy = hit.transform.GetComponent<SimpleEnemy>();
+                    Debug.Log("YES");
+                    _enemy = hit.transform.GetComponent<EnemyStateMachine>();
                     _enemy.EnablePhysics();
                     // Track rigidbody's initial information
                     rigidbody = hit.rigidbody;
