@@ -59,7 +59,11 @@ public class GravityPushGun : Gun
             if (rb)
             {
                 gobject.GetComponent<SimpleEnemy>().EnablePhysics();
-                rb.AddForce(mainCamera.transform.forward * pushPower, ForceMode.Impulse);
+                Vector3 heading = gobject.transform.position - mainCamera.transform.position;
+                Vector3 force = Vector3.Project(heading, mainCamera.transform.forward) * pushPower;
+
+                // GetComponent<Rigidbody>().AddForce(force);
+                rb.AddForce(force, ForceMode.Impulse);
             }
         }
     }

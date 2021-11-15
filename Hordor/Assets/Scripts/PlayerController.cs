@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _isGrounded = Physics.CheckSphere(groundChecker.transform.position, radius, mask);
+        CheckIsGrounded();
 
         if (_isGrounded)
         {
@@ -72,6 +72,11 @@ public class PlayerController : MonoBehaviour
         _readyToJump = true;
     }
 
+    public bool CheckIsGrounded()
+    {
+        _isGrounded = Physics.CheckSphere(groundChecker.transform.position, radius, mask);
+        return _isGrounded;
+    }
 
     private void Move()
     {
