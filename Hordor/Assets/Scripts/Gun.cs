@@ -41,15 +41,15 @@ public abstract class Gun : MonoBehaviour
             {
                 muzzleFlash.Play();
             }
-
-            Ray centerRay = CenterRay();
-            RaycastHit hit;
-            if (Physics.Raycast(centerRay, out hit, weaponRange))
-            {
-                HandleHit(hit);
-            }
+            var hits = CheckForHits();
+            HandleHit(hits);
         }
     }
+    /// <summary>
+    /// Check for whether any entities have been hit by firing this gun
+    /// </summary>
+    /// <returns></returns>
+    protected abstract  HashSet<GameObject> CheckForHits();
 
     /// <summary>
     /// The function to execute on firing the gun
@@ -65,10 +65,10 @@ public abstract class Gun : MonoBehaviour
     }
 
     /// <returns>Ray from center of the main camera's viewport forward</returns>
-    private Ray CenterRay()
+    public Ray CenterRay()
     {
         return mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
     }
 
-    protected abstract void HandleHit(RaycastHit ray);
+    protected abstract void HandleHit(HashSet<GameObject> hitObjects);
 }
