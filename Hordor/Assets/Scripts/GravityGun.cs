@@ -90,7 +90,6 @@ public class GravityGun : MonoBehaviour
                 // Don't pick up kinematic rigidbodies (they can't move)
                 if (hit.rigidbody != null && hit.transform.CompareTag("Enemy"))
                 {
-                    Debug.Log("YES");
                     _enemy = hit.transform.GetComponent<EnemyStateMachine>();
                     _enemy.EnablePhysics();
                     // Track rigidbody's initial information
