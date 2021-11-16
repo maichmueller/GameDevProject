@@ -174,4 +174,5 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(dir * boost, ForceMode.Impulse);
         _canBoost = false;
     }
+    
 }
