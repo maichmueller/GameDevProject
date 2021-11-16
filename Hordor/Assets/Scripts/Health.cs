@@ -22,8 +22,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount)
     {
         Debug.Log("Object " + this.gameObject.name + " took " + amount + " damage.");
-        _currentHealth -= amount;
-        RaiseHealthChangeEvent(MAXHealth, amount);
+        _currentHealth = Math.Max(0, _currentHealth - amount);
+        RaiseHealthChangeEvent(MAXHealth, -amount);
         if (_currentHealth <= 0)
         {
             Kill();
@@ -34,6 +34,16 @@ public class Health : MonoBehaviour
     {
         alive = false;
         RaiseDeathEvent();
+    }
+    
+    public void Heal(float amount)
+    {
+        _currentHealth = Math.Min(_currentHealth, _currentHealth + amount);
+        if (!alive && amount > 0)
+        {
+            alive = true;
+        }
+        RaiseHealthChangeEvent(MAXHealth, amount);
     }
 
     protected virtual void RaiseDeathEvent()

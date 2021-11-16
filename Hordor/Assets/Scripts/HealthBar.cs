@@ -33,7 +33,7 @@ public class HealthBar : MonoBehaviour
     {
         float preChangeFill = _healthBarImage.fillAmount;
         float elapsedTimeChange = 0f;
-        float pct = preChangeFill - absolute / max;
+        float pct = preChangeFill + absolute / max;
 
         while (elapsedTimeChange < updateSpeedSeconds)
         {

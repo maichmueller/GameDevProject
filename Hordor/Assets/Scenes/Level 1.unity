@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.05
+  m_AmbientIntensity: 1.6
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d1385980456cd2044b282d73625457db, type: 2}
@@ -2602,6 +2602,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7739230238725751348, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
   m_PrefabInstance: {fileID: 1319468771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &361549914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361549907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf2d36ed74b472aa086413b7022af7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushBackFactor: 2
+  damagePS: {fileID: 0}
 --- !u!114 &361549915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,7 +3724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 178802, guid: 4d3954090301230418284fcfa57f5332, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 474268, guid: 4d3954090301230418284fcfa57f5332, type: 3}
       propertyPath: m_RootOrder
@@ -5963,7 +5977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7739230238725751354, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
       propertyPath: jumpHeight
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7739230238725751354, guid: e2a2665ac277ec648b8605e3b14fd857, type: 3}
       propertyPath: mask.m_Bits
@@ -7382,6 +7396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637242639}
+  - component: {fileID: 1637242640}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -7411,6 +7426,21 @@ RectTransform:
   m_AnchoredPosition: {x: 176, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1637242640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637242638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89efcc1d2c5d4145bc0a55d1fcc5f6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1741441609}
+  playerObject: {fileID: 361549907}
+  updateSpeedSeconds: 0.5
 --- !u!1 &1649516061
 GameObject:
   m_ObjectHideFlags: 0
@@ -7666,7 +7696,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820125063}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -7765,12 +7795,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820125063}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5717d1a165b19d8478e45ea83673a544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 361549907}
+  lastPos: {x: 0, y: 0, z: 0}
+  lastVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1820125070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8799,7 +8831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2103692689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8816,7 +8848,7 @@ MonoBehaviour:
   fireRate: 0.25
   weaponRange: 10
   muzzleFlash: {fileID: 837017404}
-  pushPower: 2
+  pushPower: 1.5
   gunEnd: {fileID: 686782192}
   cartridgeEjection: {fileID: 418644852}
 --- !u!4 &2103692690

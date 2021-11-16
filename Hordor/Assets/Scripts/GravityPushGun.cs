@@ -15,6 +15,7 @@ public class GravityPushGun : Gun
 
     private Animator anim;
     private ConeViewTrigger _coneView;
+    private Vector3 _coneNormal;
 
     void Start()
     {
@@ -33,6 +34,8 @@ public class GravityPushGun : Gun
         coneTransform.localScale = Vector3.one;
         coneTransform.localRotation = Quaternion.Euler(0, -90, 90);
         coneTransform.localPosition = new Vector3(0, 0, weaponRange / 2);
+        
+        _coneNormal = mainCamera.transform.forward.normalized * weaponRange;
     }
     
 
@@ -63,7 +66,8 @@ public class GravityPushGun : Gun
                 Vector3 force = Vector3.Project(heading, mainCamera.transform.forward) * pushPower;
 
                 // GetComponent<Rigidbody>().AddForce(force);
-                rb.AddForce(force, ForceMode.Impulse);
+                Debug.Log("applying force " + (_coneNormal - force) + " to object (magnituted: " + (-(_coneNormal - force)).magnitude + ") gobject.name");
+                rb.AddForce(-(_coneNormal - force), ForceMode.Impulse);
             }
         }
     }

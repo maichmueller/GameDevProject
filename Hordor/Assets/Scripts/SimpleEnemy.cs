@@ -9,22 +9,23 @@ public class SimpleEnemy : MonoBehaviour
     private NavMeshAgent agent;
     private Rigidbody rb;
     public GameObject player;
-    private bool _phyisicsEnabled;
+    private bool _physicsEnabled;
 
-    private Vector3 lastpos;
+    public Vector3 lastPos;
+    public Vector3 lastVelocity;
     // Start is called before the first frame update
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         rb = gameObject.GetComponent<Rigidbody>();
-        _phyisicsEnabled = false;
-        lastpos = transform.position;
+        _physicsEnabled = false;
+        lastPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!_phyisicsEnabled)
+        if (!_physicsEnabled)
         {
             agent.SetDestination(player.transform.position);
         }
@@ -32,13 +33,14 @@ public class SimpleEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_phyisicsEnabled && lastpos == transform.position)
+        if (_physicsEnabled && lastPos == transform.position)
         {
             rb.isKinematic = true;
             agent.enabled = true;
-            _phyisicsEnabled = false;
+            _physicsEnabled = false;
         }
-        lastpos = transform.position;
+        lastVelocity = (transform.position - lastPos) / Time.deltaTime;
+        lastPos = transform.position;
     }
 
     public void EnablePhysics()
@@ -46,7 +48,7 @@ public class SimpleEnemy : MonoBehaviour
         agent.isStopped = true;
         rb.isKinematic = false;
         agent.enabled = false;
-        _phyisicsEnabled = true;
+        _physicsEnabled = true;
     }
 
     // private void OnCollisionStay(Collision other)

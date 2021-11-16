@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamager : MonoBehaviour
+public class PlayerDamager : MonoBehaviour
 {
-    public const float minVelocityForDamage = 10;
+    public float pushBackFactor;
     public ParticleSystem damagePS = null;
 
     private Health healthComp;
@@ -23,10 +23,11 @@ public class EnemyDamager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        float damageFromSpeed = other.relativeVelocity.magnitude * 2;
-        if (damageFromSpeed >= minVelocityForDamage)
+        if (other.gameObject.CompareTag("Enemy"))
         {
+            float damageFromSpeed = other.gameObject.GetComponent<SimpleEnemy>().lastVelocity.magnitude;
             healthComp.TakeDamage(damageFromSpeed);
+            this.gameObject.GetComponent<Rigidbody>().AddForce(other.gameObject.GetComponent<SimpleEnemy>().lastVelocity * pushBackFactor, ForceMode.Impulse);
         }
     }
 
