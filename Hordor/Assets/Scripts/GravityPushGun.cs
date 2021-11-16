@@ -21,7 +21,7 @@ public class GravityPushGun : Gun
     {
         anim = transform.GetChild(0).GetComponent<Animator>();
         // build the gun view mesh
-        var cone = UnityEngine.ProBuilder.ShapeGenerator.GenerateCone(PivotLocation.Center, 5f, weaponRange, 10);
+        var cone = UnityEngine.ProBuilder.ShapeGenerator.GenerateCone(PivotLocation.Center, 4f, weaponRange, 10);
         cone.gameObject.name = "ConeView";
         var collider = cone.gameObject.AddComponent<MeshCollider>();
         _coneView = cone.gameObject.AddComponent<ConeViewTrigger>();
@@ -61,7 +61,7 @@ public class GravityPushGun : Gun
             var rb = gobject.GetComponent<Rigidbody>();
             if (rb)
             {
-                gobject.GetComponent<SimpleEnemy>().EnablePhysics();
+                gobject.GetComponent<EnemyStateMachine>().EnablePhysics();
                 Vector3 heading = gobject.transform.position - mainCamera.transform.position;
                 Vector3 force = Vector3.Project(heading, mainCamera.transform.forward) * pushPower;
 

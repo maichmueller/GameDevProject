@@ -14,40 +14,46 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public bool physicsEnabled;
     public NavMeshAgent agent;
     public Rigidbody rb;
-    private Vector3 _lastpos;
+    public Vector3 lastPos;
+    public Vector3 lastVelocity;
 
     // Update is called once per frame
 
     public void ChangeState(State state)
     {
-        _physicsState = gameObject.GetComponent<PhysicsState>();
         _state = state;
+        if (!state)
+        {
+            var x = 3;
+        }
         _state.Activate();
     }
 
     protected virtual void Start()
     {
+        _physicsState = gameObject.GetComponent<PhysicsState>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         rb = gameObject.GetComponent<Rigidbody>();
         physicsEnabled = false;
-        _lastpos = transform.position;
+        lastPos = transform.position;
     }
     
     protected virtual void Update()
     {
-        Debug.Log(_state.ToString());
+        // Debug.Log(_state.ToString());
         _state.Behaviour();
     }
     
     protected virtual void FixedUpdate()
     {
-        if (physicsEnabled && _lastpos == transform.position)
+        if (physicsEnabled && lastPos == transform.position)
         {
             rb.isKinematic = true;
             agent.enabled = true;
             physicsEnabled = false;
         }
-        _lastpos = transform.position;
+        lastVelocity = (transform.position - lastPos) / Time.deltaTime;
+        lastPos = transform.position;
     }
 
     public void EnablePhysics()

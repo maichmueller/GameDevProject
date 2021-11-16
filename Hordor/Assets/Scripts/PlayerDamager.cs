@@ -25,9 +25,10 @@ public class PlayerDamager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            float damageFromSpeed = other.gameObject.GetComponent<SimpleEnemy>().lastVelocity.magnitude;
+            var lastVelocity = other.gameObject.GetComponent<EnemyStateMachine>().lastVelocity;
+            var damageFromSpeed = lastVelocity.magnitude;
             healthComp.TakeDamage(damageFromSpeed);
-            this.gameObject.GetComponent<Rigidbody>().AddForce(other.gameObject.GetComponent<SimpleEnemy>().lastVelocity * pushBackFactor, ForceMode.Impulse);
+            this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
         }
     }
 

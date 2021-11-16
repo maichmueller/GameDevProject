@@ -12,11 +12,11 @@ public class Beeline : State
     
     public override void Activate()
     {
-        if (!_machine.physicsEnabled) agent.SetDestination(player.position);
+        agent.SetDestination(player.position);
     }
 
     public override void Behaviour()
     {
-        if (!_machine.physicsEnabled) agent.SetDestination(player.position);
+        agent.SetDestination(player.position);
     }
 }
