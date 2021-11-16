@@ -22,6 +22,8 @@ public class WeaponSwitch : MonoBehaviour
             {
                 selectedWeapon = 0;
             }
+            
+            SelectWeapon();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
@@ -31,8 +33,9 @@ public class WeaponSwitch : MonoBehaviour
             {
                 selectedWeapon = transform.childCount - 1;
             }
+            
+            SelectWeapon();
         }
-        SelectWeapon();
     }
 
     private void SelectWeapon()
@@ -41,7 +44,7 @@ public class WeaponSwitch : MonoBehaviour
         foreach (Transform weapon in transform)
         {
             
-            Debug.Log(i == selectedWeapon ? "Actived weapon: " + selectedWeapon : "Deactivated weapon: " + i);
+            Debug.Log(i == selectedWeapon ? "Active weapon: " + selectedWeapon : "Deactivated weapon: " + i);
             weapon.gameObject.SetActive(i == selectedWeapon);
             i++;
         }

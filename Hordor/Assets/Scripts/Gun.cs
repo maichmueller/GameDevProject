@@ -65,7 +65,7 @@ public abstract class Gun : MonoBehaviour
     }
 
     /// <returns>Ray from center of the main camera's viewport forward</returns>
-    public Ray CenterRay()
+    protected Ray CenterRay()
     {
         return mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
     }

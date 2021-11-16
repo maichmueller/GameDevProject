@@ -17,20 +17,21 @@ public class CrosshairColor : MonoBehaviour
     {
         imgComponent = this.GetComponent<Image>();
         defaultColour = imgComponent.color;
-
     }
 
     void SetActiveWeapon()
     {
         var weaponHolder = mainCamera.transform.GetChild(0);
         activeWeapon = weaponHolder.transform
-            .GetChild(weaponHolder.gameObject.GetComponent<WeaponSwitch>().selectedWeapon).gameObject.GetComponent<Gun>();
+            .GetChild(weaponHolder.gameObject.GetComponent<WeaponSwitch>().selectedWeapon).gameObject
+            .GetComponent<Gun>();
         var x = 4;
     }
+
     void Update()
     {
         SetActiveWeapon();
-        
+
         Ray ray = CenterRay();
         RaycastHit hit;
 
@@ -44,6 +45,10 @@ public class CrosshairColor : MonoBehaviour
             {
                 ChangeColour(defaultColour);
             }
+        }
+        else
+        {
+            ChangeColour(defaultColour);
         }
     }
 

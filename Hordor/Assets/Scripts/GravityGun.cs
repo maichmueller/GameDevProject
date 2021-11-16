@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,24 +20,16 @@ using UnityEngine;
  * 
  * Original author: Jake Perry, reddit.com/user/nandos13
  */
-public class GravityGun : MonoBehaviour
+public class GravityGun : Gun
 {
-    
     // Simple Enemy
     private EnemyStateMachine _enemy;
-    
-    /// <summary>The maximum distance at which a new object can be picked up</summary>
-    public float maxGrabDistance;
-    
-    /// <summary>
-    /// The camera attached to the player object
-    /// </summary>
-    public Camera mainCamera;
-    
+
     /// <summary>The rigidbody we are currently holding</summary>
-    private new Rigidbody rigidbody;
+    private Rigidbody _rigidbody;
 
     #region Held Object Info
+
     /// <summary>The offset vector from the object's position to hit point, in local space</summary>
     private Vector3 hitOffsetLocal;
 
@@ -48,44 +41,51 @@ public class GravityGun : MonoBehaviour
 
     /// <summary>The difference between player & object rotation, updated when picked up or when rotated by the player</summary>
     private Vector3 rotationDifferenceEuler;
+
     #endregion
-    
+
     /// <summary>Tracks player input to rotate current object. Used and reset every fixedupdate call</summary>
     private Vector2 rotationInput;
 
-    /// <returns>Ray from center of the main camera's viewport forward</returns>
-    private Ray CenterRay()
-    {
-        return mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
-    }
-	
-	void Update ()
+
+    new void Update()
     {
         if (!Input.GetMouseButton(0))
         {
             // We are not holding the mouse button. Release the object and return before checking for a new one
 
-            if (rigidbody != null)
+            if (muzzleFlash)
+            {
+                muzzleFlash.Stop();
+            }
+            if (_rigidbody != null)
             {
                 // Reset the rigidbody to how it was before we grabbed it
-                rigidbody.interpolation = initialInterpolationSetting;
+                _rigidbody.interpolation = initialInterpolationSetting;
 
-                rigidbody = null;
+                _rigidbody = null;
             }
-            
+
             return;
         }
+        else
+        {
+            if (muzzleFlash)
+            {
+                muzzleFlash.Play();
+            }
+        }
 
-        if (rigidbody == null)
+        if (_rigidbody == null)
         {
             // We are not holding an object, look for one to pick up
 
             Ray ray = CenterRay();
             RaycastHit hit;
 
-            Debug.DrawRay(ray.origin, ray.direction * maxGrabDistance, Color.blue, 1f);
+            Debug.DrawRay(ray.origin, ray.direction * weaponRange, Color.blue, 1f);
 
-            if (Physics.Raycast(ray, out hit, maxGrabDistance))
+            if (Physics.Raycast(ray, out hit, weaponRange))
             {
                 // Don't pick up kinematic rigidbodies (they can't move)
                 if (hit.rigidbody != null && hit.transform.CompareTag("Enemy"))
@@ -93,8 +93,8 @@ public class GravityGun : MonoBehaviour
                     _enemy = hit.transform.GetComponent<EnemyStateMachine>();
                     _enemy.EnablePhysics();
                     // Track rigidbody's initial information
-                    rigidbody = hit.rigidbody;
-                    initialInterpolationSetting = rigidbody.interpolation;
+                    _rigidbody = hit.rigidbody;
+                    initialInterpolationSetting = _rigidbody.interpolation;
                     rotationDifferenceEuler = hit.transform.rotation.eulerAngles - transform.rotation.eulerAngles;
 
                     hitOffsetLocal = hit.transform.InverseTransformVector(hit.point - hit.transform.position);
@@ -102,7 +102,7 @@ public class GravityGun : MonoBehaviour
                     currentGrabDistance = Vector3.Distance(ray.origin, hit.point);
 
                     // Set rigidbody's interpolation for proper collision detection when being moved by the player
-                    rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+                    _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
                 }
             }
         }
@@ -115,60 +115,69 @@ public class GravityGun : MonoBehaviour
                 rotationInput += new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             }
         }
-
-        // NOTE: You may want to write some code here to prevent your player's aim from moving while you rotate objects
-        // Eg.
-        // playerAimScript.enabled = !Input.GetKey(KeyCode.R);
-	}
+    }
 
     private void FixedUpdate()
     {
-        if (rigidbody)
+        if (_rigidbody)
         {
             // We are holding an object, time to rotate & move it
-            LineRenderer lineRenderer = GetComponent<LineRenderer> ();
+            LineRenderer lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = true;
- 
-            lineRenderer.SetPosition (0, transform.GetChild(0).position);
-            lineRenderer.SetPosition (1, rigidbody.transform.position);
-            
+
+            lineRenderer.SetPosition(0, transform.GetChild(0).position);
+            lineRenderer.SetPosition(1, _rigidbody.transform.position);
+
             Ray ray = CenterRay();
 
             // Rotate the object to remain consistent with any changes in player's rotation
-            rigidbody.MoveRotation(Quaternion.Euler(rotationDifferenceEuler + transform.rotation.eulerAngles));
+            _rigidbody.MoveRotation(Quaternion.Euler(rotationDifferenceEuler + transform.rotation.eulerAngles));
 
             // Get the destination point for the point on the object we grabbed
             Vector3 holdPoint = ray.GetPoint(currentGrabDistance);
             Debug.DrawLine(ray.origin, holdPoint, Color.blue, Time.fixedDeltaTime);
 
             // Apply any intentional rotation input made by the player & clear tracked input
-            Vector3 currentEuler = rigidbody.rotation.eulerAngles;
-            rigidbody.transform.RotateAround(holdPoint, transform.right, rotationInput.y);
-            rigidbody.transform.RotateAround(holdPoint, transform.up, -rotationInput.x);
-            
+            Vector3 currentEuler = _rigidbody.rotation.eulerAngles;
+            _rigidbody.transform.RotateAround(holdPoint, transform.right, rotationInput.y);
+            _rigidbody.transform.RotateAround(holdPoint, transform.up, -rotationInput.x);
+
             // Remove all torque, reset rotation input & store the rotation difference for next FixedUpdate call
-            rigidbody.angularVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
             rotationInput = Vector2.zero;
-            rotationDifferenceEuler = rigidbody.transform.rotation.eulerAngles - transform.rotation.eulerAngles;
-            
+            rotationDifferenceEuler = _rigidbody.transform.rotation.eulerAngles - transform.rotation.eulerAngles;
+
             // Calculate object's center position based on the offset we stored
             // NOTE: We need to convert the local-space point back to world coordinates
-            Vector3 centerDestination = holdPoint - rigidbody.transform.TransformVector(hitOffsetLocal);
+            Vector3 centerDestination = holdPoint - _rigidbody.transform.TransformVector(hitOffsetLocal);
 
             // Find vector from current position to destination
-            Vector3 toDestination = centerDestination - rigidbody.transform.position;
+            Vector3 toDestination = centerDestination - _rigidbody.transform.position;
 
             // Calculate force
             Vector3 force = toDestination / Time.fixedDeltaTime;
 
             // Remove any existing velocity and add force to move to final position
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.AddForce(force, ForceMode.VelocityChange);
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.AddForce(force, ForceMode.VelocityChange);
         }
         else
         {
-            LineRenderer lineRenderer = GetComponent<LineRenderer> ();
+            LineRenderer lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
         }
+    }
+
+    protected override HashSet<GameObject> CheckForHits()
+    {
+        return new HashSet<GameObject>();
+    }
+
+    protected override void HandleHit(HashSet<GameObject> hitObjects)
+    {
+    }
+
+    protected override void Fire()
+    {
     }
 }
