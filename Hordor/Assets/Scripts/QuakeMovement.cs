@@ -65,7 +65,8 @@ public class QuakeMovement : MonoBehaviour
         // Hide the cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+;
+        
         if (playerView == null)
         {
             Camera mainCamera = Camera.main;

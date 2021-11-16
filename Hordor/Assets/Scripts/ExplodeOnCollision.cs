@@ -11,6 +11,7 @@ public class ExplodeOnCollision : MonoBehaviour
 
     private void Start()
     {
+        cubeParticleSystem.GetComponent<Renderer>().material = this.gameObject.GetComponent<Renderer>().material;
         this.gameObject.GetComponent<Health>().DeathEvent += OnDeath;
     }
 
