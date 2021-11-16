@@ -18,5 +18,10 @@ public class Beeline : State
     public override void Behaviour()
     {
         agent.SetDestination(player.position);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 5))
+        {
+            _machine.ChangeState(gameObject.GetComponent<Charge>());
+        }
     }
 }

@@ -31,6 +31,10 @@ public class PlayerDamager : MonoBehaviour
             healthComp.TakeDamage(damageFromSpeed * damageFactor);
             this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
         }
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
+            healthComp.TakeDamage(other.gameObject.GetComponent<BulletController>().damage);
+        }
     }
 
     private void OnHealthChange(float _, float __)

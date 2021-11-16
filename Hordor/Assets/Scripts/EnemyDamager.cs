@@ -23,10 +23,17 @@ public class EnemyDamager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        float damageFromSpeed = other.relativeVelocity.magnitude * 2;
-        if (damageFromSpeed >= minVelocityForDamage)
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            healthComp.TakeDamage(damageFromSpeed);
+            healthComp.TakeDamage(other.gameObject.GetComponent<BulletController>().damage);
+        }
+        else
+        {
+            float damageFromSpeed = other.relativeVelocity.magnitude * 2;
+            if (damageFromSpeed >= minVelocityForDamage)
+            {
+                healthComp.TakeDamage(damageFromSpeed);
+            }   
         }
     }
 

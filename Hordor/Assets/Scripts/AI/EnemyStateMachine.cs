@@ -40,7 +40,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void Update()
     {
-        // Debug.Log(_state.ToString());
+        Debug.Log(_state.ToString());
         _state.Behaviour();
     }
     
@@ -59,6 +59,14 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public void EnablePhysics()
     {
         ChangeState(_physicsState);
+        agent.isStopped = true;
+        rb.isKinematic = false;
+        agent.enabled = false;
+        physicsEnabled = true;
+    }
+    
+    public void EnablePhysicsWithoutStateChange()
+    {
         agent.isStopped = true;
         rb.isKinematic = false;
         agent.enabled = false;

@@ -22,10 +22,11 @@ public class Shoot : State
     {
         gameObject.transform.LookAt(player);
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, Mathf.Infinity))
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
+                Debug.DrawRay(transform.position, player.transform.position - transform.position * 1000, Color.green);
                 if (time > shootDelay)
                 {
                     Instantiate(bullet, bulletSpawn.transform.position ,bulletSpawn.transform.rotation);
@@ -34,11 +35,13 @@ public class Shoot : State
             }
             else
             {
+                Debug.DrawRay(transform.position, player.transform.position - transform.position * 1000, Color.yellow);
                 _machine.ChangeState(reposition);
             }
         }
         else
         {
+            Debug.DrawRay(transform.position, player.transform.position - transform.position * 1000, Color.red);
             _machine.ChangeState(reposition);
         }
     }
