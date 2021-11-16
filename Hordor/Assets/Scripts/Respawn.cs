@@ -18,12 +18,12 @@ public class Respawn : MonoBehaviour
 
     }
 
-    private void OnDisable()
+    private void Disable()
     {
-        if (respawn && !health.alive)
-        {
-            RespawnObject();
-        }
+        // if (respawn && !health.alive)
+        // {
+        //     RespawnObject();
+        // }
     }
     
 

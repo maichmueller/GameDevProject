@@ -66,7 +66,7 @@ public class GravityPushGun : Gun
                 Vector3 force = Vector3.Project(heading, mainCamera.transform.forward) * pushPower;
 
                 // GetComponent<Rigidbody>().AddForce(force);
-                Debug.Log("applying force " + (_coneNormal - force) + " to object (magnituted: " + (-(_coneNormal - force)).magnitude + ") gobject.name");
+                Debug.Log("applying force " + (_coneNormal - force) + " to object (magnitute: " + (-(_coneNormal - force)).magnitude + ") gobject.name");
                 rb.AddForce(-(_coneNormal - force), ForceMode.Impulse);
             }
         }
