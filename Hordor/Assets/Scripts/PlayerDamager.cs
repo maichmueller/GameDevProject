@@ -7,6 +7,7 @@ public class PlayerDamager : MonoBehaviour
 {
     public float pushBackFactor;
     public ParticleSystem damagePS = null;
+    public float damageFactor = 1f;
 
     private Health healthComp;
     private float psTime = 5f;
@@ -27,7 +28,7 @@ public class PlayerDamager : MonoBehaviour
         {
             var lastVelocity = other.gameObject.GetComponent<EnemyStateMachine>().lastVelocity;
             var damageFromSpeed = lastVelocity.magnitude;
-            healthComp.TakeDamage(damageFromSpeed);
+            healthComp.TakeDamage(damageFromSpeed * damageFactor);
             this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
         }
     }

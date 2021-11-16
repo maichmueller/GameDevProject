@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviour
     public List<Weapon> weaponList;
 
     private bool _isGrounded;
+    private bool _wasGrounded;
     private const float Gravity = 9.81f;
 
     private bool _canBoost;
+    private float _boostCooldown = 2f;
 
     private int _jumpsRemaining;
     private bool _readyToJump = true;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //Assigns components to vars
+        _wasGrounded = CheckIsGrounded();
         tf = transform;
         rb = gameObject.GetComponent<Rigidbody>();
     }
@@ -42,14 +45,22 @@ public class PlayerController : MonoBehaviour
     {
         CheckIsGrounded();
 
-        if (_isGrounded)
+        // if (_isGrounded)
+        // {
+        //     _canBoost = true;
+        //     _jumpsRemaining = maxNrJumps;
+        //     if (!_canBoost)
+        //     {
+        //         rb.velocity = Vector3.zero;
+        //     }
+        // }
+
+        if (_isGrounded && !_wasGrounded)
         {
+            // from air to ground now
             _canBoost = true;
             _jumpsRemaining = maxNrJumps;
-            if (!_canBoost)
-            {
-                rb.velocity = Vector3.zero;
-            }
+            rb.velocity = Vector3.zero;
         }
 
         Move();
@@ -72,9 +83,21 @@ public class PlayerController : MonoBehaviour
         _readyToJump = true;
     }
 
-    public bool CheckIsGrounded()
+    private void ResetBoost()
     {
-        _isGrounded = Physics.CheckSphere(groundChecker.transform.position, radius, mask);
+        if (_isGrounded)
+            _canBoost = true;
+    }
+
+    private bool CheckIsGrounded()
+    {
+        bool grounded = Physics.CheckSphere(groundChecker.transform.position, radius, mask);
+        if (grounded != _isGrounded)
+        {
+            _wasGrounded = _isGrounded;
+            _isGrounded = grounded;
+        }
+
         return _isGrounded;
     }
 
@@ -90,8 +113,8 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb.AddForce((transform.up * jumpHeight));
-    
-    Invoke(nameof(ResetJump), _jumpCooldown);
+
+        Invoke(nameof(ResetJump), _jumpCooldown);
     }
     // private void Jump()
     // {
@@ -171,8 +194,11 @@ public class PlayerController : MonoBehaviour
             dir = cam.transform.forward;
         }
 
-        rb.AddForce(dir * boost, ForceMode.Impulse);
+        rb.AddForce(dir * boost, ForceMode.Force);
         _canBoost = false;
+        if (_isGrounded)
+        {
+            Invoke(nameof(ResetBoost), _boostCooldown);
+        }
     }
-    
 }

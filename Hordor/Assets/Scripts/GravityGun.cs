@@ -126,6 +126,11 @@ public class GravityGun : MonoBehaviour
         if (rigidbody)
         {
             // We are holding an object, time to rotate & move it
+            LineRenderer lineRenderer = GetComponent<LineRenderer> ();
+            lineRenderer.enabled = true;
+ 
+            lineRenderer.SetPosition (0, transform.GetChild(0).position);
+            lineRenderer.SetPosition (1, rigidbody.transform.position);
             
             Ray ray = CenterRay();
 
@@ -159,6 +164,11 @@ public class GravityGun : MonoBehaviour
             // Remove any existing velocity and add force to move to final position
             rigidbody.velocity = Vector3.zero;
             rigidbody.AddForce(force, ForceMode.VelocityChange);
+        }
+        else
+        {
+            LineRenderer lineRenderer = GetComponent<LineRenderer> ();
+            lineRenderer.enabled = false;
         }
     }
 }
