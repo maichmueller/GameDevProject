@@ -17,4 +17,6 @@ public abstract class State : MonoBehaviour
 
     public abstract void Behaviour();
 
+    public abstract void FixedBehaviour();
+
 }

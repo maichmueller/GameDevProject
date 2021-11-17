@@ -12,7 +12,11 @@ public class PhysicsState : State
 
     public override void Behaviour()
     {
+        //if(!_machine.physicsEnabled) _machine.ChangeState(_machine.defaultState);
+    }
+
+    public override void FixedBehaviour()
+    {
         if(!_machine.physicsEnabled) _machine.ChangeState(_machine.defaultState);
     }
-    
 }

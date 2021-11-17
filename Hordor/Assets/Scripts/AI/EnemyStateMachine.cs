@@ -10,7 +10,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
 
     public State defaultState;
     private State _physicsState;
-    protected State _state;
+    public State _state;
     public bool physicsEnabled;
     public NavMeshAgent agent;
     public Rigidbody rb;
@@ -22,10 +22,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public void ChangeState(State state)
     {
         _state = state;
-        if (!state)
-        {
-            var x = 3;
-        }
+        Debug.Log(_state.ToString());
         _state.Activate();
     }
 
@@ -40,7 +37,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void Update()
     {
-        Debug.Log(_state.ToString());
+        //Debug.Log(_state.ToString());
         _state.Behaviour();
     }
     
@@ -54,6 +51,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
         }
         lastVelocity = (transform.position - lastPos) / Time.deltaTime;
         lastPos = transform.position;
+        _state.FixedBehaviour();
     }
 
     public void EnablePhysics()

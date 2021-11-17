@@ -46,6 +46,10 @@ public class Shoot : State
         }
     }
 
+    public override void FixedBehaviour()
+    {
+    }
+
     // Update is called once per frame
     void Update()
     {

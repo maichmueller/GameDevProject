@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12112766, g: 0.15458483, b: 0.22906205, a: 1}
+  m_IndirectSpecularColor: {r: 0.12112779, g: 0.15458497, b: 0.22906259, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2759,6 +2759,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381134203}
   m_CullTransparentMesh: 1
+--- !u!1 &387755935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
+  m_PrefabInstance: {fileID: 1387241649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &387755948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387755935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  power: 500
 --- !u!43 &396401025
 Mesh:
   m_ObjectHideFlags: 0
@@ -2923,6 +2942,44 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &431615236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
+  m_PrefabInstance: {fileID: 1086602199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &431615249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431615236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  power: 500
+--- !u!1 &482635954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
+  m_PrefabInstance: {fileID: 1320241485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &482635967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482635954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  power: 500
 --- !u!1 &533028167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,7 +4163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -5819,7 +5876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -6060,7 +6117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -7849,6 +7906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grunt
       objectReference: {fileID: 0}
+    - target: {fileID: 2939940640540212624, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7715533008544824209, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
       propertyPath: mainCamera
       value: 
@@ -8268,6 +8329,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2042061154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
+  m_PrefabInstance: {fileID: 1964854483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2042061167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042061154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  power: 1000
 --- !u!1 &2051493495
 GameObject:
   m_ObjectHideFlags: 0
