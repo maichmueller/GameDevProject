@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        Debug.Log("Object " + this.gameObject.name + " took " + amount + " damage.");
+        //Debug.Log("Object " + this.gameObject.name + " took " + amount + " damage.");
         _currentHealth = Math.Max(0, _currentHealth - amount);
         RaiseHealthChangeEvent(MAXHealth, -amount);
         if (_currentHealth <= 0)
@@ -48,14 +48,14 @@ public class Health : MonoBehaviour
 
     protected virtual void RaiseDeathEvent()
     {
-        Debug.Log("Raising " + this.gameObject.name + "'s 'OnDeath' event.");
+        //Debug.Log("Raising " + this.gameObject.name + "'s 'OnDeath' event.");
         // Raise the event in a thread-safe manner using the ?. operator.
         DeathEvent?.Invoke();
     }
 
     protected virtual void RaiseHealthChangeEvent(float max, float changeAbsolute)
     {
-        Debug.Log("Raising " + this.gameObject.name + "'s 'HealthChange' event.");
+        //Debug.Log("Raising " + this.gameObject.name + "'s 'HealthChange' event.");
         // Raise the event in a thread-safe manner using the ?. operator.
         HealthChangeEvent?.Invoke(max, changeAbsolute);
     }

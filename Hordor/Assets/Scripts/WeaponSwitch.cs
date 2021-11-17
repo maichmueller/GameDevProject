@@ -44,7 +44,7 @@ public class WeaponSwitch : MonoBehaviour
         foreach (Transform weapon in transform)
         {
             
-            Debug.Log(i == selectedWeapon ? "Active weapon: " + selectedWeapon : "Deactivated weapon: " + i);
+            //Debug.Log(i == selectedWeapon ? "Active weapon: " + selectedWeapon : "Deactivated weapon: " + i);
             weapon.gameObject.SetActive(i == selectedWeapon);
             i++;
         }

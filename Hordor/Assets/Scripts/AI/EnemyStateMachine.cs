@@ -16,13 +16,16 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public Rigidbody rb;
     public Vector3 lastPos;
     public Vector3 lastVelocity;
+    
+    //Patch for grav gun
+    public GravityGun gravGun;
 
     // Update is called once per frame
 
     public void ChangeState(State state)
     {
         _state = state;
-        Debug.Log(_state.ToString());
+        //Debug.Log(_state.ToString());
         _state.Activate();
     }
 
@@ -43,8 +46,9 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        if (physicsEnabled && lastPos == transform.position)
+        if (physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached)
         {
+            Debug.Log("Physics Disabled");
             rb.isKinematic = true;
             agent.enabled = true;
             physicsEnabled = false;
@@ -56,11 +60,11 @@ public abstract class EnemyStateMachine : MonoBehaviour
 
     public void EnablePhysics()
     {
-        ChangeState(_physicsState);
-        agent.isStopped = true;
-        rb.isKinematic = false;
-        agent.enabled = false;
-        physicsEnabled = true;
+        if (!physicsEnabled)
+        {
+            Debug.Log("Physics Enable Called");
+            ChangeState(_physicsState);
+        }
     }
     
     public void EnablePhysicsWithoutStateChange()
