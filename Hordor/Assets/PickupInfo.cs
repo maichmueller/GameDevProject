@@ -103,10 +103,7 @@ public class PickupInfo : MonoBehaviour
     void OnDeath()
     {
         _state = -1;
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        StartCoroutine("WaitAndReturn", 5);
     }
 
     IEnumerator WaitAndKill(float seconds)

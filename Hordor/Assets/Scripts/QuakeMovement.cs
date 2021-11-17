@@ -9,10 +9,12 @@ struct Cmd
 
 public class QuakeMovement : MonoBehaviour
 {
-    public Transform playerView;     // Camera
+    public Transform playerView; // Camera
     public float playerViewYOffset = 0.6f; // The height at which the camera is bound to
     public float xMouseSensitivity = 100.0f;
+
     public float yMouseSensitivity = 100.0f;
+
 //
     /*Frame occuring factors*/
     public float gravity = 20.0f;
@@ -20,22 +22,25 @@ public class QuakeMovement : MonoBehaviour
     public float friction = 6; //Ground friction
 
     /* Movement stuff */
-    public float moveSpeed = 7.0f;                // Ground move speed
-    public float runAcceleration = 14.0f;         // Ground accel
-    public float runDeacceleration = 10.0f;       // Deacceleration that occurs when running on the ground
-    public float airAcceleration = 2.0f;          // Air accel
-    public float airDecceleration = 2.0f;         // Deacceleration experienced when ooposite strafing
-    public float airControl = 0.3f;               // How precise air control is
-    public float sideStrafeAcceleration = 50.0f;  // How fast acceleration occurs to get up to sideStrafeSpeed when
-    public float sideStrafeSpeed = 1.0f;          // What the max speed to generate when side strafing
-    public float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
-    public bool holdJumpToBhop = false;           // When enabled allows player to just hold jump button to keep on bhopping perfectly. Beware: smells like casual.
+    public float moveSpeed = 7.0f; // Ground move speed
+    public float runAcceleration = 14.0f; // Ground accel
+    public float runDeacceleration = 10.0f; // Deacceleration that occurs when running on the ground
+    public float airAcceleration = 2.0f; // Air accel
+    public float airDecceleration = 2.0f; // Deacceleration experienced when ooposite strafing
+    public float airControl = 0.3f; // How precise air control is
+    public float sideStrafeAcceleration = 50.0f; // How fast acceleration occurs to get up to sideStrafeSpeed when
+    public float sideStrafeSpeed = 1.0f; // What the max speed to generate when side strafing
+    public float jumpSpeed = 8.0f; // The speed at which the character's up axis gains when hitting jump
+
+    public bool
+        holdJumpToBhop =
+            false; // When enabled allows player to just hold jump button to keep on bhopping perfectly. Beware: smells like casual.
 
     /*print() style */
     public GUIStyle style;
 
     /*FPS Stuff */
-    public float fpsDisplayRate = 4.0f; // 4 updates per sec
+    // public float fpsDisplayRate = 4.0f; // 4 updates per sec
 
     private int frameCount = 0;
     private float dt = 0.0f;
@@ -65,8 +70,8 @@ public class QuakeMovement : MonoBehaviour
         // Hide the cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-;
-        
+        ;
+
         if (playerView == null)
         {
             Camera mainCamera = Camera.main;
@@ -85,17 +90,19 @@ public class QuakeMovement : MonoBehaviour
 
     private void Update()
     {
-        // Do FPS calculation
-        frameCount++;
-        dt += Time.deltaTime;
-        if (dt > 1.0 / fpsDisplayRate)
-        {
-            fps = Mathf.Round(frameCount / dt);
-            frameCount = 0;
-            dt -= 1.0f / fpsDisplayRate;
-                 }
+        // // Do FPS calculation
+        // frameCount++;
+        // dt += Time.deltaTime;
+        // if (dt > 1.0 / fpsDisplayRate)
+        // {
+        //     fps = Mathf.Round(frameCount / dt);
+        //     frameCount = 0;
+        //     dt -= 1.0f / fpsDisplayRate;
+        // }
+
         /* Ensure that the cursor is locked into the screen */
-        if (Cursor.lockState != CursorLockMode.Locked) {
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
             if (Input.GetButtonDown("Fire1"))
                 Cursor.lockState = CursorLockMode.Locked;
         }
@@ -105,21 +112,20 @@ public class QuakeMovement : MonoBehaviour
         rotY += Input.GetAxisRaw("Mouse X") * yMouseSensitivity * 0.02f;
 
         // Clamp the X rotation
-        if(rotX < -90)
+        if (rotX < -90)
             rotX = -90;
-        else if(rotX > 90)
+        else if (rotX > 90)
             rotX = 90;
 
         this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
-        playerView.rotation     = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
+        playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
 
-        
 
         /* Movement, here's the important part */
         QueueJump();
-        if(_controller.isGrounded)
+        if (_controller.isGrounded)
             GroundMove();
-        else if(!_controller.isGrounded)
+        else if (!_controller.isGrounded)
             AirMove();
 
         // Move the controller
@@ -128,7 +134,7 @@ public class QuakeMovement : MonoBehaviour
         /* Calculate top velocity */
         Vector3 udp = playerVelocity;
         udp.y = 0.0f;
-        if(udp.magnitude > playerTopVelocity)
+        if (udp.magnitude > playerTopVelocity)
             playerTopVelocity = udp.magnitude;
 
         //Need to move the camera after the player has been moved because otherwise the camera will clip the player if going fast enough and will always be 1 frame behind.
@@ -139,9 +145,9 @@ public class QuakeMovement : MonoBehaviour
             transform.position.z);
     }
 
-     /*******************************************************************************************************\
-    |* MOVEMENT
-    \*******************************************************************************************************/
+    /*******************************************************************************************************\
+   |* MOVEMENT
+   \*******************************************************************************************************/
 
     /**
      * Sets the movement direction based on player input
@@ -149,7 +155,7 @@ public class QuakeMovement : MonoBehaviour
     private void SetMovementDir()
     {
         _cmd.forwardMove = Input.GetAxisRaw("Vertical");
-        _cmd.rightMove   = Input.GetAxisRaw("Horizontal");
+        _cmd.rightMove = Input.GetAxisRaw("Horizontal");
     }
 
     /**
@@ -157,15 +163,15 @@ public class QuakeMovement : MonoBehaviour
      */
     private void QueueJump()
     {
-        if(holdJumpToBhop)
+        if (holdJumpToBhop)
         {
             wishJump = Input.GetButton("Jump");
             return;
         }
 
-        if(Input.GetButtonDown("Jump") && !wishJump)
+        if (Input.GetButtonDown("Jump") && !wishJump)
             wishJump = true;
-        if(Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp("Jump"))
             wishJump = false;
     }
 
@@ -177,10 +183,10 @@ public class QuakeMovement : MonoBehaviour
         Vector3 wishdir;
         float wishvel = airAcceleration;
         float accel;
-        
+
         SetMovementDir();
 
-        wishdir =  new Vector3(_cmd.rightMove, 0, _cmd.forwardMove);
+        wishdir = new Vector3(_cmd.rightMove, 0, _cmd.forwardMove);
         wishdir = transform.TransformDirection(wishdir);
 
         float wishspeed = wishdir.magnitude;
@@ -196,15 +202,15 @@ public class QuakeMovement : MonoBehaviour
         else
             accel = airAcceleration;
         // If the player is ONLY strafing left or right
-        if(_cmd.forwardMove == 0 && _cmd.rightMove != 0)
+        if (_cmd.forwardMove == 0 && _cmd.rightMove != 0)
         {
-            if(wishspeed > sideStrafeSpeed)
+            if (wishspeed > sideStrafeSpeed)
                 wishspeed = sideStrafeSpeed;
             accel = sideStrafeAcceleration;
         }
 
         Accelerate(wishdir, wishspeed, accel);
-        if(airControl > 0)
+        if (airControl > 0)
             AirControl(wishdir, wishspeed2);
         // !CPM: Aircontrol
 
@@ -225,7 +231,7 @@ public class QuakeMovement : MonoBehaviour
         float k;
 
         // Can't control movement if not moving forward or backward
-        if(Mathf.Abs(_cmd.forwardMove) < 0.001 || Mathf.Abs(wishspeed) < 0.001)
+        if (Mathf.Abs(_cmd.forwardMove) < 0.001 || Mathf.Abs(wishspeed) < 0.001)
             return;
         zspeed = playerVelocity.y;
         playerVelocity.y = 0;
@@ -281,7 +287,7 @@ public class QuakeMovement : MonoBehaviour
         // Reset the gravity velocity
         playerVelocity.y = -gravity * Time.deltaTime;
 
-        if(wishJump)
+        if (wishJump)
         {
             playerVelocity.y = jumpSpeed;
             wishJump = false;
@@ -304,7 +310,7 @@ public class QuakeMovement : MonoBehaviour
         drop = 0.0f;
 
         /* Only if the player is on the ground then apply friction */
-        if(_controller.isGrounded)
+        if (_controller.isGrounded)
         {
             control = speed < runDeacceleration ? runDeacceleration : speed;
             drop = control * friction * Time.deltaTime * t;
@@ -312,9 +318,9 @@ public class QuakeMovement : MonoBehaviour
 
         newspeed = speed - drop;
         playerFriction = newspeed;
-        if(newspeed < 0)
+        if (newspeed < 0)
             newspeed = 0;
-        if(speed > 0)
+        if (speed > 0)
             newspeed /= speed;
 
         playerVelocity.x *= newspeed;
@@ -329,23 +335,22 @@ public class QuakeMovement : MonoBehaviour
 
         currentspeed = Vector3.Dot(playerVelocity, wishdir);
         addspeed = wishspeed - currentspeed;
-        if(addspeed <= 0)
+        if (addspeed <= 0)
             return;
         accelspeed = accel * Time.deltaTime * wishspeed;
-        if(accelspeed > addspeed)
+        if (accelspeed > addspeed)
             accelspeed = addspeed;
 
         playerVelocity.x += accelspeed * wishdir.x;
         playerVelocity.z += accelspeed * wishdir.z;
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 400, 100), "FPS: " + fps, style);
-        var ups = _controller.velocity;
-        ups.y = 0;
-        GUI.Label(new Rect(0, 15, 400, 100), "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups", style);
-        GUI.Label(new Rect(0, 30, 400, 100), "Top Speed: " + Mathf.Round(playerTopVelocity * 100) / 100 + "ups", style);
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(0, 0, 400, 100), "FPS: " + fps, style);
+    //     var ups = _controller.velocity;
+    //     ups.y = 0;
+    //     GUI.Label(new Rect(0, 15, 400, 100), "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups", style);
+    //     GUI.Label(new Rect(0, 30, 400, 100), "Top Speed: " + Mathf.Round(playerTopVelocity * 100) / 100 + "ups", style);
+    // }
 }
-    
