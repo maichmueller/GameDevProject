@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
+    public GameObject player;
+
     public float playerDamagePerSecond = 10f;
+
     private void OnCollisionEnter(Collision other)
     {
         var otherGO = other.gameObject;
@@ -16,12 +19,28 @@ public class LavaController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        var otherGO = other.gameObject;
-        if (otherGO.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            otherGO.GetComponent<Health>().TakeDamage(playerDamagePerSecond);
+            StartCoroutine(Damage());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StopCoroutine(Damage());
+        }
+    }
+
+    IEnumerator Damage()
+    {
+        while (true)
+        {
+            player.GetComponent<Health>().TakeDamage(playerDamagePerSecond);
+            yield return null;
         }
     }
 }

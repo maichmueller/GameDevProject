@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
-  updateSpeedSeconds: 0.5
+  updateSpeedSeconds: 0.1
 --- !u!1 &1311017831897898349
 GameObject:
   m_ObjectHideFlags: 0

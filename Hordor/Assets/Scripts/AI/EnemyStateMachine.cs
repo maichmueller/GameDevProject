@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,6 +29,15 @@ public abstract class EnemyStateMachine : MonoBehaviour
         _state = state;
         //Debug.Log(_state.ToString());
         _state.Activate();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        string[] tags = {"Player", "Enemy"};
+        if (tags.Contains(other.gameObject.tag))
+        {
+            EnablePhysics();
+        }
     }
 
     protected virtual void Start()

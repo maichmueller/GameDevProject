@@ -29,7 +29,7 @@ public class EnemyDamager : MonoBehaviour
         }
         else
         {
-            float damageFromSpeed = other.relativeVelocity.magnitude * 2;
+            float damageFromSpeed = other.relativeVelocity.magnitude * 4;
             if (damageFromSpeed >= minVelocityForDamage)
             {
                 healthComp.TakeDamage(damageFromSpeed);

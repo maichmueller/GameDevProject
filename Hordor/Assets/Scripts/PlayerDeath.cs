@@ -12,6 +12,7 @@ public class PlayerDeath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         this.gameObject.GetComponent<Health>().DeathEvent += OnDeath;
     }
 
