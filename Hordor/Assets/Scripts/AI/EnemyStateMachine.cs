@@ -17,6 +17,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public Vector3 lastPos;
     public Vector3 lastVelocity;
 
+    private float velThresh = 0.001f;
     // Update is called once per frame
 
     public void ChangeState(State state)
@@ -46,7 +47,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        if (physicsEnabled && lastPos == transform.position)
+        if (physicsEnabled && this.gameObject.GetComponent<Rigidbody>().velocity.magnitude < velThresh) 
         {
             rb.isKinematic = true;
             agent.enabled = true;

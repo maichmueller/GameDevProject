@@ -18,6 +18,8 @@ public class PlayerDeath : MonoBehaviour
     // Update is called once per frame
     void OnDeath()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         Immobilize();
         endPosition = transform.position + endPositionChange;
         StartCoroutine(Fall());
