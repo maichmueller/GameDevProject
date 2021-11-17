@@ -4106,7 +4106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -4610,7 +4610,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 7a6a73d126605cf49984b7d4cbae1135, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -5819,7 +5819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -6060,7 +6060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -8096,7 +8096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
