@@ -40,7 +40,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void Update()
     {
-        Debug.Log(_state.ToString());
+        // Debug.Log(_state.ToString());
         _state.Behaviour();
     }
     

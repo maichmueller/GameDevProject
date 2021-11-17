@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 79989180285730896}
   - component: {fileID: -2924224061200923553}
   - component: {fileID: -7132143689652047790}
+  - component: {fileID: -2166251961542418560}
   m_Layer: 0
   m_Name: Menace
   m_TagString: Enemy
@@ -120,6 +121,8 @@ MonoBehaviour:
   physicsEnabled: 0
   agent: {fileID: 6874520594663444587}
   rb: {fileID: 6874520594663444586}
+  lastPos: {x: 0, y: 0, z: 0}
+  lastVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &6874520594663444588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +227,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePS: {fileID: 5220178843118010601, guid: 8379e079400c4a14fbb2c3dc694ae2d6, type: 3}
+--- !u!114 &-2166251961542418560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874520594663444585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  power: 100
 --- !u!1001 &2074157997459191567
 PrefabInstance:
   m_ObjectHideFlags: 0
