@@ -47,6 +47,8 @@ public class GravityGun : Gun
     /// <summary>Tracks player input to rotate current object. Used and reset every fixedupdate call</summary>
     private Vector2 rotationInput;
 
+    public bool gravGunBeingUsed;
+
 
     new void Update()
     {
@@ -54,6 +56,7 @@ public class GravityGun : Gun
         {
             // We are not holding the mouse button. Release the object and return before checking for a new one
 
+            gravGunBeingUsed = false;
             if (muzzleFlash)
             {
                 muzzleFlash.Stop();
@@ -70,6 +73,7 @@ public class GravityGun : Gun
         }
         else
         {
+            gravGunBeingUsed = true;
             if (muzzleFlash)
             {
                 muzzleFlash.Play();

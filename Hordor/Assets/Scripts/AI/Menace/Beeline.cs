@@ -12,7 +12,7 @@ public class Beeline : State
     
     public override void Activate()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(player.position + (-player.forward * 4));
     }
 
     public override void Behaviour()
@@ -23,5 +23,9 @@ public class Beeline : State
         {
             _machine.ChangeState(gameObject.GetComponent<Charge>());
         }
+    }
+
+    public override void FixedBehaviour()
+    {
     }
 }

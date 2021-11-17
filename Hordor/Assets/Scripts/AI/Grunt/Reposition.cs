@@ -30,4 +30,8 @@ public class Reposition : State
             }
         }
     }
+
+    public override void FixedBehaviour()
+    {
+    }
 }
