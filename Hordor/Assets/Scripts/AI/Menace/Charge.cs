@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Charge : State
 {
+    public AudioClip scream;
     private GameObject _player;
     private Vector3 chargePos;
     private NavMeshAgent _agent;
@@ -15,9 +16,11 @@ public class Charge : State
     public float acceleration;
     private float _defaultAcceleration;
     private float _elapsed;
+    private AudioSource audio;
 
     public override void Activate()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         _agent = gameObject.GetComponent<NavMeshAgent>();
         _agent.isStopped = true;
         _agent.ResetPath();
@@ -28,6 +31,7 @@ public class Charge : State
         gameObject.transform.LookAt(chargePos);
         _agent.acceleration += acceleration;
         _agent.speed += power;
+        //audio.PlayDelayed(chargeWait);
         //Debug.Log("LOOK AT");
         //chargePos = transform.forward;
         //StartCoroutine(nameof(StartCharge));
@@ -42,9 +46,11 @@ public class Charge : State
 
     public override void FixedBehaviour()
     {
-        if (_elapsed > chargeWait)
+        if (_elapsed > chargeWait && _elapsed < chargeWait + 0.1f)
         {
             _agent.SetDestination(chargePos);
+            audio.clip = scream;
+            audio.Play();
         }
         if (_elapsed > cooldown + chargeWait)
         {

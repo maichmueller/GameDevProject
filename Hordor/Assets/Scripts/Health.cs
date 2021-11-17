@@ -6,12 +6,20 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
+    private AudioSource audio;
     public float MAXHealth = 100;
     public bool alive = true;
     private float _currentHealth;
 
     public event Action DeathEvent = delegate { };
     public event Action<float, float> HealthChangeEvent = delegate { };
+
+    private void Start()
+    {
+        audio = gameObject.GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -27,6 +35,12 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0)
         {
             Kill();
+        }
+        else
+        {
+            //Debug.Log("Object " + this.gameObject.name + "Plays hurt sound");
+            audio.clip = hurtSound;
+            audio.Play();
         }
     }
 
@@ -58,5 +72,11 @@ public class Health : MonoBehaviour
         //Debug.Log("Raising " + this.gameObject.name + "'s 'HealthChange' event.");
         // Raise the event in a thread-safe manner using the ?. operator.
         HealthChangeEvent?.Invoke(max, changeAbsolute);
+    }
+
+    private void OnDestroy()
+    {
+        audio.clip = deathSound;
+        AudioSource.PlayClipAtPoint(deathSound, transform.position);
     }
 }

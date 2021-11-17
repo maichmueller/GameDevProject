@@ -9,6 +9,8 @@ struct Cmd
 
 public class QuakeMovement : MonoBehaviour
 {
+    public AudioClip jumpSound;
+    private AudioSource audio;
     public Transform playerView;     // Camera
     public float playerViewYOffset = 0.6f; // The height at which the camera is bound to
     public float xMouseSensitivity = 100.0f;
@@ -62,6 +64,7 @@ public class QuakeMovement : MonoBehaviour
 
     private void Start()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         // Hide the cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,6 +88,12 @@ public class QuakeMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetButton("Jump"))
+        {
+            audio.clip = jumpSound;
+            audio.Play();
+        }
+        
         // Do FPS calculation
         frameCount++;
         dt += Time.deltaTime;
@@ -117,8 +126,10 @@ public class QuakeMovement : MonoBehaviour
 
         /* Movement, here's the important part */
         QueueJump();
-        if(_controller.isGrounded)
-            GroundMove();
+        if (_controller.isGrounded)
+        {
+            GroundMove();   
+        }
         else if(!_controller.isGrounded)
             AirMove();
 
@@ -163,8 +174,10 @@ public class QuakeMovement : MonoBehaviour
             return;
         }
 
-        if(Input.GetButtonDown("Jump") && !wishJump)
-            wishJump = true;
+        if (Input.GetButtonDown("Jump") && !wishJump)
+        {
+            wishJump = true;   
+        }
         if(Input.GetButtonUp("Jump"))
             wishJump = false;
     }

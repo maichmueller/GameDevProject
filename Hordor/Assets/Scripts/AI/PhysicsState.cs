@@ -7,7 +7,7 @@ public class PhysicsState : State
 {
     // Start is called before the first frame update
 
-    public bool reached;
+    public bool reached = false;
 
     public override void Activate()
     {
