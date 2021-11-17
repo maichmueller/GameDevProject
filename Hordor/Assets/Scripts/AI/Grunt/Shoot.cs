@@ -5,15 +5,18 @@ using UnityEngine.AI;
 
 public class Shoot : State
 {
+    public AudioClip shootingSound;
     public GameObject bullet;
     public GameObject bulletSpawn;
     public Transform player;
     public Reposition reposition;
     private float time;
     public float shootDelay;
+    private AudioSource audio;
 
     public override void Activate()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         reposition = gameObject.GetComponent<Reposition>();
         time = 0f;
     }
@@ -30,6 +33,8 @@ public class Shoot : State
                 if (time > shootDelay)
                 {
                     Instantiate(bullet, bulletSpawn.transform.position ,bulletSpawn.transform.rotation);
+                    audio.clip = shootingSound;
+                    audio.Play();
                     time = 0f;
                 }
             }

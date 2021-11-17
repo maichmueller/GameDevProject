@@ -1126,7 +1126,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 942df4673a3216b4daa05dad00997236, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1641,7 +1641,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2702,6 +2702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scream: {fileID: 0}
   cooldown: 2
   chargeWait: 0
   power: 500
@@ -7192,6 +7193,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2939940640540212621, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
+      propertyPath: gravGun
+      value: 
+      objectReference: {fileID: 852551205}
     - target: {fileID: 2939940640540212622, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
       propertyPath: player
       value: 
@@ -7210,7 +7215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2939940640540212624, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020336817546925767, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
+      propertyPath: MAXHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7715533008544824209, guid: dc0d5541c05bb7f4bafaeee62370e515, type: 3}
       propertyPath: mainCamera
@@ -7504,7 +7513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444585, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874520594663444588, guid: 9c65fe59436266c4a88629e5ef6e0308, type: 3}
       propertyPath: player
@@ -7698,6 +7707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7bdf0278586ad438805a755475a75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scream: {fileID: 0}
   cooldown: 2
   chargeWait: 0
   power: 1000

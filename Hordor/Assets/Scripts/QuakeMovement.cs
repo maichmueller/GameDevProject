@@ -9,7 +9,9 @@ struct Cmd
 
 public class QuakeMovement : MonoBehaviour
 {
-    public Transform playerView; // Camera
+    public AudioClip jumpSound;
+    private AudioSource audio;
+    public Transform playerView;     // Camera
     public float playerViewYOffset = 0.6f; // The height at which the camera is bound to
     public float xMouseSensitivity = 100.0f;
 
@@ -67,6 +69,7 @@ public class QuakeMovement : MonoBehaviour
 
     private void Start()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         // Hide the cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -90,22 +93,12 @@ public class QuakeMovement : MonoBehaviour
 
     private void Update()
     {
-        // // Do FPS calculation
-        // frameCount++;
-        // dt += Time.deltaTime;
-        // if (dt > 1.0 / fpsDisplayRate)
-        // {
-        //     fps = Mathf.Round(frameCount / dt);
-        //     frameCount = 0;
-        //     dt -= 1.0f / fpsDisplayRate;
-        // }
-
-        /* Ensure that the cursor is locked into the screen */
-        if (Cursor.lockState != CursorLockMode.Locked)
+        if (Input.GetButton("Jump"))
         {
-            if (Input.GetButtonDown("Fire1"))
-                Cursor.lockState = CursorLockMode.Locked;
+            audio.clip = jumpSound;
+            audio.Play();
         }
+        
 
         /* Camera rotation stuff, mouse controls this shit */
         rotX -= Input.GetAxisRaw("Mouse Y") * xMouseSensitivity * 0.02f;

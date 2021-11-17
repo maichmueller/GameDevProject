@@ -17,6 +17,8 @@ public abstract class EnemyStateMachine : MonoBehaviour
     public Rigidbody rb;
     public Vector3 lastPos;
     public Vector3 lastVelocity;
+    private float waitTime;
+    private float _elapsed;
     
     //Patch for grav gun
     public GravityGun gravGun;
@@ -42,6 +44,8 @@ public abstract class EnemyStateMachine : MonoBehaviour
 
     protected virtual void Start()
     {
+        waitTime = 1f;
+        _elapsed = 0f;
         _physicsState = gameObject.GetComponent<PhysicsState>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         rb = gameObject.GetComponent<Rigidbody>();
@@ -57,7 +61,8 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        if (physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached)
+        Debug.Log(physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached && _elapsed > waitTime);
+        if (physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached && _elapsed > waitTime)
         {
             Debug.Log("Physics Disabled");
             rb.isKinematic = true;
@@ -67,6 +72,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
         lastVelocity = (transform.position - lastPos) / Time.deltaTime;
         lastPos = transform.position;
         _state.FixedBehaviour();
+        _elapsed += Time.deltaTime;
     }
 
     public void EnablePhysics()
@@ -75,6 +81,7 @@ public abstract class EnemyStateMachine : MonoBehaviour
         {
             Debug.Log("Physics Enable Called");
             ChangeState(_physicsState);
+            _elapsed = 0f;
         }
     }
     
