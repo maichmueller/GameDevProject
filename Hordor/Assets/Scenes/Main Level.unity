@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 80969982}
   m_IndirectSpecularColor: {r: 0.45882225, g: 0.32293877, b: 0.3217781, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2a56c058044cdf34e9a1f940745e6715, type: 2}
   m_LightingSettings: {fileID: 771510331}
 --- !u!196 &4
 NavMeshSettings:
@@ -1131,7 +1131,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2550240218f63fe4ab840c5e567546e2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.393
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
