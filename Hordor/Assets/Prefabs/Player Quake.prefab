@@ -58,6 +58,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3967785813790125222, guid: d49e4798976c8d34bac9b7897132cab7, type: 3}
+      propertyPath: pushPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967785813790125222, guid: d49e4798976c8d34bac9b7897132cab7, type: 3}
+      propertyPath: weaponRange
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3967785813790125223, guid: d49e4798976c8d34bac9b7897132cab7, type: 3}
       propertyPath: m_IsActive
       value: 0

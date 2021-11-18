@@ -21,7 +21,7 @@ public class GravityPushGun : Gun
     {
         anim = transform.GetChild(0).GetComponent<Animator>();
         // build the gun view mesh
-        var cone = UnityEngine.ProBuilder.ShapeGenerator.GenerateCone(PivotLocation.Center, 4f, weaponRange, 10);
+        var cone = UnityEngine.ProBuilder.ShapeGenerator.GenerateCone(PivotLocation.Center, 5f, weaponRange, 10);
         cone.gameObject.name = "ConeView";
         var collider = cone.gameObject.AddComponent<MeshCollider>();
         _coneView = cone.gameObject.AddComponent<ConeViewTrigger>();

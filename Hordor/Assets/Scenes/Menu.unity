@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663aa34b8ec4201469797b0037125a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgMusic: {fileID: 0}
   VideoGameObject: {fileID: 1762084552}
 --- !u!114 &59992449
 MonoBehaviour:
@@ -656,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24fe8fc9e42ce2459cf0d268d33b7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgMusic: {fileID: 323125388}
   VideoGameObject: {fileID: 1762084552}
 --- !u!1 &844745730
 GameObject:

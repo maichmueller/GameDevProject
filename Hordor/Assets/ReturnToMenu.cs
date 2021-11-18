@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReturnToMenu : MonoBehaviour
 {
-   
+    public GameObject bgMusic;
     public GameObject VideoGameObject;
     void Update()
     {
@@ -13,6 +13,7 @@ public class ReturnToMenu : MonoBehaviour
             this.gameObject.SetActive(false);
             VideoGameObject.SetActive(false);
             transform.parent.GetChild(1).transform.gameObject.SetActive(true);
+            bgMusic.GetComponent<AudioSource>().Play();
         }
     }
 }

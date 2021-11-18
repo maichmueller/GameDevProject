@@ -8,6 +8,7 @@ using UnityEngine.Video;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject bgMusic;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -38,6 +39,7 @@ public class MainMenu : MonoBehaviour
         var video = transform.parent.GetChild(2).gameObject;
         video.gameObject.SetActive(true);
         VideoGameObject.SetActive(true);
+        bgMusic.GetComponent<AudioSource>().Stop();
     }
     
 
