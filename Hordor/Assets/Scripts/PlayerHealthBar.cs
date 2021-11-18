@@ -29,8 +29,6 @@ public class PlayerHealthBar : MonoBehaviour
     {
         Health health = playerObject.GetComponent<Health>();
         float preChangeFill = health.currentHealth / health.MAXHealth;
-        float elapsedTimeChange = 0f;
-        float pct = preChangeFill + absolute / max;
         _healthBarImage.fillAmount = preChangeFill;
         _healthBarValueText.text = ((int) (_healthBarImage.fillAmount * max)).ToString() + " / " + ((int) max).ToString();
         // if (_activeCoroutine != null)
