@@ -13,13 +13,12 @@ public class RestartScene : MonoBehaviour
     {
         var player = GameObject.FindWithTag("Player");
         var button = this.gameObject.GetComponent<Button>();
-        button.enabled = false;
-        player.GetComponent<Health>().DeathEvent += () => { button.enabled = true; };
+        player.GetComponent<Health>().DeathEvent += () => { button.gameObject.SetActive(true); };
     }
 
     public void OnClick()
     {
-        Debug.Log("RESTART BUTTON CLICKED");
+        Debug.Log("BACK TO MENU BUTTON CLICKED");
         SceneManager.LoadScene("Scenes/Menu");
     }
 }

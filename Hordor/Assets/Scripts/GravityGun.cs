@@ -26,7 +26,7 @@ public class GravityGun : Gun
     private EnemyStateMachine _enemy;
 
     /// <summary>The rigidbody we are currently holding</summary>
-    private Rigidbody _rigidbody;
+    public Rigidbody _rigidbody;
 
     #region Held Object Info
 

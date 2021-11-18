@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class PickupInfo : MonoBehaviour
@@ -25,6 +26,7 @@ public class PickupInfo : MonoBehaviour
         spawnLocations.Add(enemy.transform.position + new Vector3(-5, 0, 0));
         spawnLocations.Add(enemy.transform.position + new Vector3(5, 0, 0));
         player.GetComponent<Health>().DeathEvent += OnDeath;
+        enemy.GetComponent<Health>().DeathEvent += OnEnemyDeath;
     }
 
     // Update is called once per frame
@@ -72,7 +74,12 @@ public class PickupInfo : MonoBehaviour
                 }
                 case 3:
                 {
-                    StartCoroutine("WaitAndKill", 5f);
+                    if (!Input.GetMouseButtonDown(0) &&
+                        player.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<GravityGun>()._rigidbody == null)
+                    {
+                        SetActiveChild(2);
+                    }
+
                     break;
                 }
                 default:
@@ -81,21 +88,33 @@ public class PickupInfo : MonoBehaviour
                 }
             }
         }
-        else if (_state == 4)
-        {
-            prefabs[0].SetActive(true);
-            prefabs[1].SetActive(true);
-
-            _state = 5;
-        }
         else if (_state > 0 && _state < 3)
         {
             SetActiveChild(1);
         }
 
+        if (_state == 4)
+        {
+            prefabs[0].SetActive(true);
+            prefabs[1].SetActive(true);
+            foreach (var prefab in prefabs)
+            {
+                prefab.GetComponent<NavMeshAgent>().enabled = false;
+                var beeline = prefab.GetComponent<Beeline>();
+                if (beeline)
+                {
+                    beeline.enabled = false;
+                }
+            }
+
+            StartCoroutine("WaitAndActivate", 5f);
+            _state = 5;
+        }
+
+
         if (!prefabs[0].GetComponent<Health>().alive && !prefabs[1].GetComponent<Health>().alive)
         {
-            StartCoroutine("WaitAndReturn", 2);
+            StartCoroutine("WaitAndReturn", 3);
         }
     }
 
@@ -103,7 +122,13 @@ public class PickupInfo : MonoBehaviour
     void OnDeath()
     {
         _state = -1;
+        this.gameObject.SetActive(false);
         StartCoroutine("WaitAndReturn", 5);
+    }
+
+    void OnEnemyDeath()
+    {
+        SetActiveChild(4);
     }
 
     IEnumerator WaitAndKill(float seconds)
@@ -118,6 +143,36 @@ public class PickupInfo : MonoBehaviour
         if (_state != 4)
         {
             SetActiveChild(4);
+        }
+    }
+
+    IEnumerator WaitAndActivate(float seconds)
+    {
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (var prefab in prefabs)
+        {
+            prefab.GetComponent<NavMeshAgent>().enabled = true;
+            var beeline = prefab.GetComponent<Beeline>();
+            if (beeline)
+            {
+                beeline.enabled = true;
+            }
+            // var charge = prefab.GetComponent<Charge>();
+            // if (charge)
+            // {
+            //     charge.enabled = true;
+            // }
+            // var charge = prefab.GetComponent<Charge>();
+            // if (charge)
+            // {
+            //     charge.enabled = true;
+            // }
         }
     }
 

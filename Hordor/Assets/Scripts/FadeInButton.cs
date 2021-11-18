@@ -21,7 +21,7 @@ public class FadeInButton : MonoBehaviour
 
     void OnDeath()
     {
-        _button.enabled = true;
+        // _button.enabled = true;
         StartCoroutine(FadeIn());
     }
 
