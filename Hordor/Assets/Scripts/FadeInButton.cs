@@ -12,6 +12,7 @@ public class FadeInButton : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         _button = this.gameObject.GetComponent<Button>();
         Color curColor = _button.image.color;
         curColor.a = 0;

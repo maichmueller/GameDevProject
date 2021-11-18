@@ -182,7 +182,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 2939940641850385603}
   player: {fileID: 0}
   reposition: {fileID: 0}
-  shootDelay: 0.5
+  shootDelay: 0.2
 --- !u!114 &2939940640540212623
 MonoBehaviour:
   m_ObjectHideFlags: 0

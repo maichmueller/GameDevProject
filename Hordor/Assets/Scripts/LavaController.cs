@@ -9,6 +9,11 @@ public class LavaController : MonoBehaviour
 
     public float playerDamagePerSecond = 10f;
 
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         var otherGO = other.gameObject;

@@ -14,6 +14,8 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void Start()
     {
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        playerObject = GameObject.FindWithTag("Player");
         playerObject.GetComponent<Health>().HealthChangeEvent += OnHealthChange;
         _healthBarImage = this.transform.GetChild(1).GetComponent<Image>();
         _healthBarValueText = this.transform.GetChild(2).GetComponent<Text>();

@@ -12,6 +12,7 @@ public class FadeInText : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         _text = this.gameObject.GetComponent<Text>();
         Color curColor = _text.color;
         curColor.a = 0;

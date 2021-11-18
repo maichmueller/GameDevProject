@@ -61,7 +61,6 @@ public abstract class EnemyStateMachine : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        Debug.Log(physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached && _elapsed > waitTime);
         if (physicsEnabled && lastPos == transform.position && GetComponent<PhysicsState>().reached && _elapsed > waitTime)
         {
             Debug.Log("Physics Disabled");
