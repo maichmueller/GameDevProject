@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyDamager : MonoBehaviour
 {
-    public const float minVelocityForDamage = 10;
+    public float minVelocityForDamage = 10;
     public ParticleSystem damagePS = null;
 
     private Health healthComp;
@@ -23,6 +23,8 @@ public class EnemyDamager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("Collision enter of " + this.gameObject.name);
+        Debug.Log("Rel speed damage: " + other.relativeVelocity.magnitude * 4);
         if (other.gameObject.CompareTag("Bullet"))
         {
             healthComp.TakeDamage(other.gameObject.GetComponent<BulletController>().damage);
@@ -36,7 +38,7 @@ public class EnemyDamager : MonoBehaviour
             if (damageFromSpeed >= minVelocityForDamage)
             {
                 healthComp.TakeDamage(damageFromSpeed);
-            }   
+            }
         }
     }
 

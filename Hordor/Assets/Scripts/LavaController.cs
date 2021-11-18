@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+
+    private Coroutine _startedCoroutine;
 
     public float playerDamagePerSecond = 10f;
 
@@ -22,21 +24,22 @@ public class LavaController : MonoBehaviour
             Debug.Log("Killable object hit lava");
             otherGO.GetComponent<Health>().Kill();
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        else if(otherGO.CompareTag("Player"))
         {
-            StartCoroutine(Damage());
+            _startedCoroutine = StartCoroutine(Damage());
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionStay(Collision other)
+    {
+        player.GetComponent<Health>().TakeDamage(playerDamagePerSecond * Time.deltaTime);
+    }
+
+    private void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StopCoroutine(Damage());
+            StopCoroutine(_startedCoroutine);
         }
     }
 
@@ -44,7 +47,7 @@ public class LavaController : MonoBehaviour
     {
         while (true)
         {
-            player.GetComponent<Health>().TakeDamage(playerDamagePerSecond);
+            player.GetComponent<Health>().TakeDamage(playerDamagePerSecond * Time.deltaTime);
             yield return null;
         }
     }

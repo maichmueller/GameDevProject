@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     private AudioSource audio;
     public float MAXHealth = 100;
     public bool alive = true;
-    private float _currentHealth;
+    public float currentHealth;
 
     public event Action DeathEvent = delegate { };
     public event Action<float, float> HealthChangeEvent = delegate { };
@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
 
     private void OnEnable()
     {
-        _currentHealth = MAXHealth;
+        currentHealth = MAXHealth;
         alive = true;
     }
 
@@ -33,9 +33,9 @@ public class Health : MonoBehaviour
     {
 
         Debug.Log("Object " + this.gameObject.name + " took " + amount + " damage.");
-        _currentHealth = Math.Max(0, _currentHealth - amount);
+        currentHealth = Math.Max(0, currentHealth - amount);
         RaiseHealthChangeEvent(MAXHealth, -amount);
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             audio.clip = deathSound;
             AudioSource.PlayClipAtPoint(deathSound, transform.position);
@@ -47,6 +47,7 @@ public class Health : MonoBehaviour
             audio.clip = hurtSound;
             audio.Play();
         }
+        Debug.Log("Remaining health " + currentHealth);
     }
 
     public void Kill()
@@ -57,7 +58,7 @@ public class Health : MonoBehaviour
     
     public void Heal(float amount)
     {
-        _currentHealth = Math.Min(_currentHealth, _currentHealth + amount);
+        currentHealth = Math.Min(currentHealth, currentHealth + amount);
         if (!alive && amount > 0)
         {
             alive = true;
