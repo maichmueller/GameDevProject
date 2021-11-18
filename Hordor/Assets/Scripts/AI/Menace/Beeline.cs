@@ -12,6 +12,7 @@ public class Beeline : State
     
     public override void Activate()
     {
+        player = GameObject.FindWithTag("Player").transform;
         agent.SetDestination(player.position + (-player.forward * 4));
     }
 

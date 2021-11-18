@@ -12,6 +12,7 @@ public class Reposition : State
     
     public override void Activate()
     {
+        player = GameObject.FindWithTag("Player").transform;
         agent.isStopped = false;
         shoot = gameObject.GetComponent<Shoot>();
         if (!_machine.physicsEnabled) agent.SetDestination(player.position);

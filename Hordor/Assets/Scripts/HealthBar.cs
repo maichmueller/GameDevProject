@@ -14,6 +14,11 @@ public class HealthBar : MonoBehaviour
     
     private Vector3 _startingPositionDifference;
 
+    private void Start()
+    {
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+    }
+
     private void OnEnable()
     {
         _parentTransform = transform.parent.transform.parent;
