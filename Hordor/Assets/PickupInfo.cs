@@ -75,7 +75,8 @@ public class PickupInfo : MonoBehaviour
                 case 3:
                 {
                     if (!Input.GetMouseButtonDown(0) &&
-                        player.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<GravityGun>()._rigidbody == null)
+                        player.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<GravityGun>()._rigidbody ==
+                        null)
                     {
                         SetActiveChild(2);
                     }
@@ -104,6 +105,11 @@ public class PickupInfo : MonoBehaviour
                 if (beeline)
                 {
                     beeline.enabled = false;
+                }
+                var shooter = prefab.GetComponent<Shoot>();
+                if (shooter)
+                {
+                    shooter.shootDelay = 4f;
                 }
             }
 
@@ -162,6 +168,12 @@ public class PickupInfo : MonoBehaviour
             if (beeline)
             {
                 beeline.enabled = true;
+            }
+
+            var shooter = prefab.GetComponent<Shoot>();
+            if (shooter)
+            {
+                shooter.shootDelay = 0.2f;
             }
             // var charge = prefab.GetComponent<Charge>();
             // if (charge)

@@ -11,6 +11,7 @@ public class FadeInImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         _blackScreen = this.gameObject.GetComponent<Image>();
         Color curColor = _blackScreen.color;
         curColor.a = 0;

@@ -12,6 +12,11 @@ public class CrosshairColor : MonoBehaviour
     private Image imgComponent;
     private Gun activeWeapon;
 
+    private void Start()
+    {
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+    }
+
 
     private void Awake()
     {
