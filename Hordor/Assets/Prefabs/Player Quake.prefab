@@ -193,21 +193,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8058969920562555922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5740238344162670359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e616c68d9b786be4c9b21e7d00980ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  durationOfDeathBehaviour: 0.5
-  endRotationEulers: {x: 0, y: 0, z: 85}
-  endPositionChange: {x: 0, y: -0.1, z: 0}
 --- !u!82 &1731082762394216620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -220,7 +205,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.215
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -304,6 +289,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8058969920562555922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740238344162670359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e616c68d9b786be4c9b21e7d00980ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durationOfDeathBehaviour: 0.5
+  endRotationEulers: {x: 0, y: 0, z: 85}
+  endPositionChange: {x: 0, y: -0.1, z: 0}
 --- !u!120 &8737086967047936994
 LineRenderer:
   m_ObjectHideFlags: 0

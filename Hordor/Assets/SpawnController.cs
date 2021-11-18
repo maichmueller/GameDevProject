@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class SpawnController : MonoBehaviour
     public float lerpIncrement;
     public float timeBetweenSpawn;
     private float lerpProgress;
+    
+    public event Action<GameObject> SpawnEvent = delegate { };
+    
     void Start()
     {
         StartCoroutine(nameof(StartSpawn));
@@ -21,12 +25,13 @@ public class SpawnController : MonoBehaviour
         while (true)
         {
             var chance = Mathf.Lerp(startChance, endChance, lerpProgress / 100);
-            var roll = Random.Range(0f, 1f);
+            var roll = UnityEngine.Random.Range(0f, 1f);
             if (roll < chance / 100)
             {
                 //Debug.Log("Success!, Rolled "+roll+"against chance of "+chance);
-                var index = Random.Range(0, enemies.Length);
-                Instantiate(enemies[index], transform.position, transform.rotation);
+                var index = UnityEngine.Random.Range(0, enemies.Length);
+                var gameObject = Instantiate(enemies[index], transform.position, transform.rotation);
+                RaiseSpawnEvent(gameObject);
             }
             else
             {
@@ -35,5 +40,12 @@ public class SpawnController : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenSpawn);
             lerpProgress += lerpIncrement;
         }
+    }
+    
+    protected virtual void RaiseSpawnEvent(GameObject obj)
+    {
+        Debug.Log("Raising " + this.gameObject.name + "'s 'Spawn' event.");
+        // Raise the event in a thread-safe manner using the ?. operator.
+        SpawnEvent?.Invoke(obj);
     }
 }

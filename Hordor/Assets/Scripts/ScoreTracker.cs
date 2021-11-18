@@ -6,15 +6,24 @@ using UnityEngine.UI;
 
 public class ScoreTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-    public Health health;
+    public List<SpawnController> SpawnControllers;
     public float scoreIncrease = 10;
     public Text scoreText;
 
     private void Start()
     {
-        health.DeathEvent+=UpdateScore;
+        foreach (SpawnController spc in SpawnControllers)
+        {
+            spc.SpawnEvent += OnSpawn;
+        }
+    }
+
+    void OnSpawn(GameObject obj)
+    {
+        if (obj.CompareTag("Enemy"))
+        {
+            obj.GetComponent<Health>().DeathEvent += UpdateScore;
+        }
     }
 
     void UpdateScore()

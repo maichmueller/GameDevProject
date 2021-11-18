@@ -32,19 +32,22 @@ public class PlayerDamager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy") && elapsed >= damageImmune)
+        if (this.gameObject.GetComponent<Health>().alive)
         {
-            elapsed = 0f;
-            var lastVelocity = other.gameObject.GetComponent<EnemyStateMachine>().lastVelocity;
-            Debug.Log(lastVelocity);
-            var damageFromSpeed = lastVelocity.magnitude / 4;
-            Debug.Log(damageFromSpeed);
-            healthComp.TakeDamage(damageFromSpeed * damageFactor);
-            this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
-        }
-        else if (other.gameObject.CompareTag("Bullet"))
-        {
-            healthComp.TakeDamage(other.gameObject.GetComponent<BulletController>().damage);
+            if (other.gameObject.CompareTag("Enemy") && elapsed >= damageImmune)
+            {
+                elapsed = 0f;
+                var lastVelocity = other.gameObject.GetComponent<EnemyStateMachine>().lastVelocity;
+                Debug.Log(lastVelocity);
+                var damageFromSpeed = lastVelocity.magnitude / 4;
+                Debug.Log(damageFromSpeed);
+                healthComp.TakeDamage(damageFromSpeed * damageFactor);
+                this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
+            }
+            else if (other.gameObject.CompareTag("Bullet"))
+            {
+                healthComp.TakeDamage(other.gameObject.GetComponent<BulletController>().damage);
+            }
         }
     }
 
