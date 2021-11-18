@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6699,7 +6699,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 232697911418694003, guid: 008f932fb184f3944af87261b7792e07, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 232697911418694003, guid: 008f932fb184f3944af87261b7792e07, type: 3}
       propertyPath: m_CollisionDetection
@@ -6757,10 +6757,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4379788159462663016, guid: 008f932fb184f3944af87261b7792e07, type: 3}
+      propertyPath: m_Volume
+      value: 0.49
+      objectReference: {fileID: 0}
     - target: {fileID: 5665802396722178724, guid: 008f932fb184f3944af87261b7792e07, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7266371314192426880, guid: 008f932fb184f3944af87261b7792e07, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ca8ba68f04e588a4db2fdd6db41a61ca, type: 3}
     - target: {fileID: 7520432355418057193, guid: 008f932fb184f3944af87261b7792e07, type: 3}
       propertyPath: m_IsActive
       value: 0

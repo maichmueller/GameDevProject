@@ -8,6 +8,8 @@ public class PlayerDamager : MonoBehaviour
     public float pushBackFactor;
     public ParticleSystem damagePS = null;
     public float damageFactor = 1f;
+    private float damageImmune = 1;
+    private float elapsed;
 
     private Health healthComp;
     private float psTime = 5f;
@@ -15,6 +17,12 @@ public class PlayerDamager : MonoBehaviour
     private void Start()
     {
         healthComp = this.gameObject.GetComponent<Health>();
+        elapsed = damageImmune;
+    }
+
+    private void Update()
+    {
+        elapsed += Time.deltaTime;
     }
 
     private void OnEnable()
@@ -24,10 +32,13 @@ public class PlayerDamager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && elapsed >= damageImmune)
         {
+            elapsed = 0f;
             var lastVelocity = other.gameObject.GetComponent<EnemyStateMachine>().lastVelocity;
-            var damageFromSpeed = lastVelocity.magnitude;
+            Debug.Log(lastVelocity);
+            var damageFromSpeed = lastVelocity.magnitude / 4;
+            Debug.Log(damageFromSpeed);
             healthComp.TakeDamage(damageFromSpeed * damageFactor);
             this.gameObject.GetComponent<Rigidbody>().AddForce(lastVelocity * pushBackFactor, ForceMode.Impulse);
         }
