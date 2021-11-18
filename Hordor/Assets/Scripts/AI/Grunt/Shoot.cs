@@ -16,6 +16,7 @@ public class Shoot : State
 
     public override void Activate()
     {
+        player = GameObject.FindWithTag("Player").transform;
         audio = gameObject.GetComponent<AudioSource>();
         reposition = gameObject.GetComponent<Reposition>();
         time = 0f;
